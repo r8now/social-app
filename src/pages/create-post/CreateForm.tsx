@@ -6,6 +6,8 @@ import { addDoc, collection } from 'firebase/firestore'
 import { auth,db } from '../../config/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
+import { useNavigate } from 'react-router-dom'
+
 interface CreateFormData{
   title: string,
   description: string
@@ -13,6 +15,7 @@ interface CreateFormData{
 
 const CreateForm = () => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
 
   const schema = yup.object().shape({
@@ -34,6 +37,7 @@ const onCreatPost = async (data: CreateFormData) => {
     userId:user?.uid
   });
 
+  navigate("/")
 };
 
 
